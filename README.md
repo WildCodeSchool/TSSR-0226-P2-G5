@@ -32,7 +32,7 @@ Le projet s'inscrit dans un cadre d'apprentissage des compétences de Technicien
 ## 3. Technologies utilisées et Choix techniques
 
 ### 3.1 Virtualisation 
-La technologie de virtualisation utilisée est VirtualBox pour héberger les machines virtuelles (VM).
+**VirtualBox** est la technologie utilisée pour héberger les machines virtuelles (VM).
 ### 3.2 Système exploitation
 
 - Serveur : **Linux** (Débian 13)
