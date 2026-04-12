@@ -35,8 +35,11 @@ Le projet s'inscrit dans un cadre d'apprentissage des compétences de Technicien
 **VirtualBox** est la technologie utilisée pour héberger les machines virtuelles (VM).
 ### 3.2 Système exploitation
 
-- Serveur : **Linux** (Débian 13)
-- Client : **Linux** (Ubuntu 24) 
+| Nom | Role | OS | IP | Compte | Mot de passe |
+|-----|------|----|----|--------|--------------|
+| SRVLX01 | Serveur Principal | Debian | 172.16.50.10 | root/wilder | Azerty1* |
+| CLILIN01 | Client | Ubuntu | 172.16.50.30 | wilder | Azerty1* |
+
 ### 3.3 Langages de script
 Pour l'environnement Linux, le langage utilisé est **Bash**    
 ### 3.4 Gestion de version
