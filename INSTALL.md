@@ -1,6 +1,6 @@
 ## Sommaire
 
-## 1. Installation sur le serveur Debian
+## 1. Installation sur le serveur Linux (Debian)
 ### Prérequis techniques
 - 1.1. Changement du nom de la machine
 - 1.2. Mise à jour du logiciel
