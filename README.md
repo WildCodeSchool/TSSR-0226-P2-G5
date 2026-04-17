@@ -18,7 +18,9 @@
   - 4.4 [Interface](#44-interface)
   - 4.5 [Option Sortir](#45-option-sortir)
 5. [Difficultés rencontrées](#5-difficultés-rencontrées)
-6. [Améliorations possibles](#6-améliorations-possibles)
+6. [Solutions apportées ](#6-solutions-apportées)
+7. [Améliorations possibles](#7-améliorations-possibles)
+
 
 
 
@@ -72,4 +74,9 @@ L'option **Sortir** ou **quitter** permet de quitter le script de manière propr
   - La manipulation et l'analyse du "pseudo-code" pour le transformer en script fonctionnel.
   - Le débogage des scripts lors des phases de tests intensifs.
 
-## 6. Améliorations possibles
+## 6. Solutions apportées
+  - Mise en place de clés SSH
+  - Configuration des permissions sudo
+  - Tests réguliers et correction des erreurs
+  - Structuration du code en fonctions
+## 7. Améliorations possibles
