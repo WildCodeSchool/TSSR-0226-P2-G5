@@ -16,6 +16,9 @@
    - 3.5. [Vérification du service](#35-vérification-du-service)
     
 4. [Connexion SSH](#4-connexion-ssh)
+   - 4.1. [Génération de la clé SSH](#41-Génération-de-la-clé-ssh)
+   - 4.2. [Copie de la clé SSH](#42-copie-de-la-clé-ssh)
+   - 4.3. [Test de la connexion](#43-test-de-la-connexion)
 
 
 1. Prérequis techniques
