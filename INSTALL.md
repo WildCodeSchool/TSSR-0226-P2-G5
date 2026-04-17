@@ -102,11 +102,12 @@
 
     
   - 4.4. Vérification du service
+    
     Après installation de l'application OpenSSH-client et serveur, activer le service SSH avec les commandes suivantes:
       - sudo systemctl start ssh
       - sudo systemctl enable ssh
         
-    <img width="1272" height="616" alt="Activation_Service_SSH_Client" src="https://github.com/user-attachments/assets/4b4a4da0-7096-4f67-95b9-890fbc3c3c73" />
+      <img width="1107" height="135" alt="Vérification_Service_SSH_CLI" src="https://github.com/user-attachments/assets/6e221d4a-b53e-43ff-b9f0-0a838aec635a" />
 
         
 5. Connexion SSH
