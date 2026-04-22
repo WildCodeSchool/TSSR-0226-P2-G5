@@ -25,6 +25,7 @@
    Ce document décrit les étapes nécessaires pour installer et utiliser l’outil d’administration système développé en Bash dans le cadre du projet Scripting en       TSSR.
    
 2. Prérequis techniques
+   
   - Avoir VirtualsBox déjà installé sur sa machine physique
   - Avoir les images ISO à sa disposition pour la création des Vms
   - S'assurer d'avoir toutes les VMs sur le même Réseau dans VirtualBox.
@@ -50,6 +51,7 @@
        <img width="841" height="400" alt="Verfication_Carte_Réseau" src="https://github.com/user-attachments/assets/381d2124-9b2f-44d4-bb99-03f4ba98a8f9" />
 
   - 3.2. Mise à jour du système
+    
     - Se connecter avec le compte utilisateur wilder ou en mode root, puis mettre à jour et installer avec la commande suivante:
         - **sudo apt update** : pour mettre à jour les paquets du système
           
@@ -81,6 +83,7 @@
 
     
   - 4.2. Configuration de IP fixe
+  - 
       - Sur Ubuntu, la configuration de l'IP fixe peut se faire via l'interface graphique.
       - Aller dans *connexions filaires*,puis *Paramètre filaire*. 
       - Cliquer sur la roue cranté pour sélectionner une carte réseau soit la carte *Ethernet enps03* soit la carte *Ethernet enps08*
@@ -112,7 +115,29 @@
         
 5. Connexion SSH
   - 5.1. Génération de la clé SSH
-  - 5.2. Copie de la clé SSH vers le Client
-  - 5.3. Test de la connexion
+    
+    La clé SSH : Est une chaîne de caractères extrêmement longue et complexe générée aléatoirement. Pour "deviner" une clé RSA de 4096 bits, il faudrait des           millénaires avec la puissance de calcul actuelle. D'où, l'importance d'utiliser une clé ssh plutot qu'un mot de passe.
+    
+    Depuis le Serveur SRVLX01, générer une clé SHH avec la commande :
+    
+    *ssh-keygen*
+    
+    <img width="992" height="333" alt="Generercle_ssh" src="https://github.com/user-attachments/assets/a49c8c2b-2a3f-4f85-8f9e-41128c17b291" />
 
+  - 5.2. Copie de la clé SSH vers le Client
+    
+    La commande : *ssh-copy-id <user>@<addressIPserverssh>* ,elle va chercher la clé publique (généralement située dans ~/.ssh/id_rsa.pub) sur la machine locale       et l'envoie vers le serveur distant (172.16.50.10) pour l'utilisateur wilder.
+    
+    <img width="944" height="229" alt="copiecle_vers_Ubuntu" src="https://github.com/user-attachments/assets/8fbe75f9-39e1-477e-b6d9-28da3e5f2330" />
+    
+  - 5.3. Test de la connexion
+    
+    Le teste de la connexion se fait à l'aide de:
+
+    comme ceci: ssh wilder@172.16.50.30
+
+    <img width="687" height="267" alt="Test_de_connexion_depuis_serveur" src="https://github.com/user-attachments/assets/af610879-6e69-4f1d-b85c-4388092a94fa" />
+    
+
+    
 
