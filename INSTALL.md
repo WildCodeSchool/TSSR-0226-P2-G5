@@ -28,7 +28,8 @@
    
   - Avoir VirtualsBox déjà installé sur sa machine physique
   - Avoir les images ISO à sa disposition pour la création des Vms
-  - S'assurer d'avoir toutes les VMs sur le même Réseau dans VirtualBox.
+  - Avoir deux machines opérationnelles une Serveur et un Client
+  - S'assurer d'avoir toutes les machines sur le même Réseau dans VirtualBox.
   - Système de distribution Linux : Débian et Ubuntu
   - Avoir droit d'Administrateur sudo avant d'exécuter le script
    
