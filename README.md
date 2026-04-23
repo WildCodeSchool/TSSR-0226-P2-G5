@@ -48,24 +48,31 @@ Pour l'environnement Linux, le langage utilisé est **Bash**
 GitHub pour le dépôt de code et des documents.
 
 ## 4. Fonctionnalités des scripts
+
 Les scripts doivent proposer une navigation via un menu ergonomique permettant de choisir une cible (client) et une action à mener:
 ### 4.1 Gestion des machines
+
 - Arrêt et redémarrage
 - Execution des commandes à distances
 - Interrogation du système (Version OS ou état de machine)
+  
 ### 4.2 Gestion des utilisateurs
+
 - Création et Suppression
 - Modification mot de passe
 - Informations (dernière connexion et changement de mot de passe)
 ### 4.3 Collecte informations
+
 - Système
 - Utilisateur
 ### 4.4 Interface
+
 - Menu interactif
 - Choix
     - cible(client)
     - Action ou information
 ### 4.5 Option Sortir
+
 L'option **Sortir** ou **quitter** permet de quitter le script de manière propre et ergonomique.
 
 ## 5. Difficultés rencontrées
@@ -79,4 +86,15 @@ L'option **Sortir** ou **quitter** permet de quitter le script de manière propr
   - Configuration des permissions sudo
   - Tests réguliers et correction des erreurs
   - Structuration du code en fonctions
+    
 ## 7. Améliorations possibles
+
+- A court terme
+    - Ajout de verification d'erreur
+    - Gestion des exceptions
+    - Sécurité avancée
+ 
+- A Moyen et long terme
+    - Introduction d'Interface graphique (GUI)
+    - Gestion multi-machines simultanées 
+    
