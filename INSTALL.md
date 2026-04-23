@@ -66,11 +66,12 @@
 
   - 3.4. Vérification du service
     
-    Redémarrer le système avec la commande : 
+    Redémarrer le système avec la commande :
+    
       - systemctl restart ssh : Pour redémarrer le service ssh dans le système
         
-
       - systemctl status ssh : Pour verifier l'état du ssh dans le système, il doit etre *enabled*
+        
         <img width="752" height="308" alt="Statut_du_Service_SSH" src="https://github.com/user-attachments/assets/2af6cfc1-1cf2-47f3-a824-cbbb8b617aac" />
               
 4. Installation sur le client Ubuntu
@@ -78,6 +79,7 @@
   - 4.1. Mise à jour du système
     - Se connecter avec le compte utilisateur wilder ou en mode root, puis mettre à jour et installer avec la commande suivante:
         - **sudo apt update** : pour mettre à jour les paquets du système
+        - 
     <img width="977" height="245" alt="Mise_à_jour_Systeme_Client" src="https://github.com/user-attachments/assets/74d11294-f52d-4fe3-9e11-257788eb5435" />
 
 
