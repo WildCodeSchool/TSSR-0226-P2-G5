@@ -1,1 +1,314 @@
+#!/bin/bash
 
+# Vérification du compte root avant exécution du script
+if [ "$EUID" -ne 0 ]; then
+    echo "Avertissement: Ce script ne peut etre lancé qu'avec le droit Admin sudo"
+    exit 1
+fi
+
+# Fonctions pause(pour faire intéragir l'utilisateur)
+pause() {
+    echo ""
+    read -p "Appuyez sur la touche [Entrée] pour continuer..."
+}
+
+nettoyage_ecran() {
+    clear
+}
+
+# =========================
+# MENU MACHINE
+# =========================
+menu_machine() {
+    while true; do
+        nettoyage_ecran
+
+        echo "======================="
+        echo "    GESTION MACHINE    "
+        echo "======================="
+        echo "1 - Verrouillage"
+        echo "2 - Redémarrage"
+        echo "0 - Retour"
+        read -p "Faites un choix : " action
+
+        case $action in
+            1)
+                echo "Verrouillage session en cours..."
+                loginctl lock-session
+                pause
+                ;;
+            2)
+                echo "Redémarrage en cours..."
+                reboot
+                ;;
+            0) return ;;
+            *) echo "Erreur de manipulation"; 
+            pause ;;
+        esac
+    done
+}
+
+# =========================
+# MENU REPERTOIRES
+# =========================
+menu_repertoires() {
+    while true; do
+        nettoyage_ecran
+        echo "==========================="
+        echo "  GESTION DES REPERTOIRES  "
+        echo "==========================="
+        #ls -d */ 2>/dev/null
+        echo ""
+        echo "1 - Créer"
+        echo "2 - Supprimer"
+        echo "0 - Retour"
+        read -p "Faites un Choix : " action
+
+        case $action in
+            1)
+                read -p "Veuillez Saisir le nom du répertoire à créer : " nom_rep
+                if [ -d "$nom_rep" ]; then
+                    echo "Erreur :Le répertoire '$nom_rep' existe déjà"
+                else
+                    mkdir "$nom_rep"
+                    echo "Le répertoire '$nom_rep' est Créé avec succès"
+                fi
+                pause
+                ;;
+            2)
+                read -p "Veuillez Saisir le nom du répertoire à supprimer : " nom_rep
+                if [ -d "$nom_rep" ]; then
+                    read -p "Voulez-vous vraiment supprimer le repertoire '$nom_rep' ? (oui/non) : " reponse
+                    if [ "$reponse" = "oui" ];then
+                        rm -r "$nom_rep"
+                        echo "Le répertoire '$nom_rep' vient d'être Supprimé"
+                    elif [ "$reponse" = "non" ];then
+                        echo "Aucune suppression n'est faite"
+                    fi
+                else
+                    echo "Erreur : Le répertoire '$nom_rep' est inexistant"
+                fi
+                pause
+                ;;
+            0) return ;;
+            *) echo "Erreur"; 
+            pause ;;
+        esac
+    done
+}
+
+# =========================
+# MENU UTILISATEURS
+# =========================
+menu_utilisateurs() {
+    while true; do
+        nettoyage_ecran
+        echo "============================"
+        echo "    GESTION UTILISATEUR     "
+        echo "============================"
+        echo "1 - Créer utilisateur"
+        echo "2 - Supprimer utilisateur"
+        echo "3 - Mot de passe"
+        echo "0 - Retour"
+        read -p "Choix : " action
+
+        case $action in
+            1)
+                read -p "Veuillez saisir le nom d'utilisateur : " utilisateur
+                if id "$utilisateur" &>/dev/null; then
+                    echo "L'utilisateur '$utilisateur' existe déjà"
+                else
+                    useradd "$utilisateur"
+                    echo "L'utilisateur '$utilisateur' est crée avec succès "
+                fi
+                pause
+                ;;
+            2)
+                read -p "Veuillez saisir le nom d'utilisateur : " utilisateur
+
+                if ! id "$utilisateur" &>/dev/null; then
+                    echo "L'utilisateur '$utilisateur' est inexistant"
+                else
+                    read -p "Confirmer la suppression de '$utilisateur' ? (oui/non) : " reponse
+
+                    if [ "$reponse" = "oui" ]; then
+
+                # Vérifie si le dossier home existe
+                        if [ -d "/home/$utilisateur" ]; then
+                        userdel -r "$utilisateur" 2>/dev/null
+                    else
+                    userdel "$utilisateur" 2>/dev/null
+                    fi
+
+                # Vérifie si la suppression a réussi
+                    if id "$utilisateur" &>/dev/null; then
+                    echo "Erreur lors de la suppression"
+                    else
+                    echo "L'utilisateur '$utilisateur' a été supprimé avec succès"
+                    fi
+                    else
+                    echo "Suppression annulée"
+                    fi
+                fi
+                pause
+                ;;
+            
+                
+                #read -p "Veuillez saisir le nom d'utilisateur : " utilisateur
+                #if id "$utilisateur" &>/dev/null; then
+                    #userdel -r "$utilisateur"
+                    #echo "L'utilisateur '$utilisateur' vient d'être supprimé"
+                #else
+                    #echo "L'utilisateur '$utilisateur' est inexistant"
+                #fi
+                #pause
+                #;;
+            3)
+                read -p "Nom utilisateur : " utilisateur
+                if id "$utilisateur" &>/dev/null; then
+                    menu_motdepasse "$utilisateur"
+                else
+                    echo "L'utilisateur $utilisateur est inexistant"
+                    pause
+                fi
+                ;;
+            0) return ;;
+            *) echo "Erreur";
+            pause ;;
+        esac
+    done
+}
+
+menu_motdepasse() {
+    utilisateur=$1
+    while true; do
+        nettoyage_ecran
+
+        echo "================================"
+        echo "GESTION MOT DE PASSE UTILISATEUR"
+        echo "================================"
+        echo "1 - Créer" 
+        echo "2 - Supprimer"
+        echo "0 - Retour"
+        read -p "Faites un choix : " action
+
+        case $action in
+            1)
+                passwd "$utilisateur"
+                echo "Le mot de passe de '$utilisateur' vient d'être crée avec succès"
+                pause
+                ;;
+            2)
+                passwd -d "$utilisateur"
+                echo "Le Mot de passe de '$utilisateur' vient d'être supprimé"
+                pause
+                ;;
+            0) return ;;
+            *) echo "Erreur"; 
+            pause ;;
+        esac
+    done
+}
+
+# =========================
+# MENU GROUPES
+# =========================
+menu_groupes() {
+    while true; do
+        nettoyage_ecran
+        echo "======================="
+        echo "   GESTION GROUPES     "
+        echo "======================="
+        echo "1 - Ajouter au groupe admin"
+        echo "2 - Ajouter à un groupe"
+        echo "0 - Retour"
+        read -p "Choix : " action
+
+        [ "$action" = "0" ] && return
+
+        read -p "Veuillez saisir l'utilisateur : " utilisateur
+        if ! id "$utilisateur" &>/dev/null; then
+            echo "L'utilisateur '$utilisateur' inexistant"
+            pause
+            continue
+        fi
+
+        case $action in
+            1)
+                usermod -aG sudo "$utilisateur"
+                echo "L'utilisateur '$utilisateur' vient d'être ajouté au groupe sudo"
+                ;;
+            2)
+                read -p "Groupe : " group
+                if ! getent group "$group" >/dev/null; then
+                    groupadd "$group"
+                    echo "Le groupe $group est créé avec succès"
+                fi
+                usermod -aG "$group" "$utilisateur"
+                echo "Vient d'être ajouté au groupe"
+                ;;
+            *)
+                echo "Erreur"
+                ;;
+        esac
+        pause
+    done
+}
+
+# =========================
+# MENU INFOS SYSTEME
+# =========================
+menu_infos() {
+    while true; do
+        nettoyage_ecran
+        echo "==========================="
+        echo "    INFORMATIONS SYSTEME    "
+        echo "==========================="
+        echo "1 - Dernière connexion"
+        echo "2 - Version OS"
+        echo "3 - Partitions"
+        echo "4 - RAM"
+        echo "0 - Retour"
+        read -p "Choix : " action
+
+        case $action in
+            1) lastlog | head; pause ;;
+            2) cat /etc/os-release; pause ;;
+            3) df -h; pause ;;
+            4) free -h; pause ;;
+            0) return ;;
+            *) echo "Erreur"; pause ;;
+        esac
+    done
+}
+
+# =========================
+# MENU PRINCIPAL
+# =========================
+while true; do
+    nettoyage_ecran
+    echo "======================"
+    echo "                      "
+    echo "  MENU PRINCIPAL      "
+    echo "                      "
+    echo "======================"
+    echo "1 - Machine"
+    echo "2 - Répertoires"
+    echo "3 - Utilisateurs"
+    echo "4 - Groupes"
+    echo "5 - Informations système"
+    echo "0 - Quitter"
+    read -p "Faites un choix : " choix
+
+    case $choix in
+        1) menu_machine ;;
+        2) menu_repertoires ;;
+        3) menu_utilisateurs ;;
+        4) menu_groupes ;;
+        5) menu_infos ;;
+        0) exit 0 ;;
+        *) echo "Erreur"; pause ;;
+    esac
+    
+done
+nettoyage_ecran
