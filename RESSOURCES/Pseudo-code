@@ -1,1 +1,228 @@
+DEBUT
+SI utilisateur != root ALORS
+    afficher "Avertissement: Ce script ne peut etre lancé qu'avec le droit Admin sudo"
+    QUITTER
+FIN SI
+FONCTION pause
+    afficher ""
+    attendre entrée utilisateur
+FIN FONCTION
+FONCTION nettoyage_ecran
+    effacer écran
+FIN FONCTION
+FONCTION menu_machine
+    TANT QUE vrai
+        nettoyage_ecran
+        afficher menu machine
+        lire action
+        SELON action
+            CAS 1
+                afficher "Verrouillage session en cours..."
+                verrouiller session
+                pause
+            CAS 2
+                afficher "Redémarrage en cours..."
+                redémarrer machine
+            CAS 0
+                retourner
+            AUTRE
+                afficher "Erreur de manipulation"
+                pause
+        FIN SELON
+    FIN TANT QUE
+FIN FONCTION
+FONCTION menu_repertoires
+    TANT QUE vrai
+        nettoyage_ecran
+        afficher menu répertoires
+        lire action
+        SELON action
+            CAS 1
+                lire nom_rep
+                SI répertoire existe ALORS
+                    afficher erreur
+                SINON
+                    créer répertoire
+                    afficher succès
+                FIN SI
+                pause
+            CAS 2
+                lire nom_rep
+                SI répertoire existe ALORS
+                    lire confirmation
+                    SI oui ALORS
+                        supprimer répertoire
+                        afficher succès
+                    SINON SI non ALORS
+                        afficher aucune suppression
+                    FIN SI
+                SINON
+                    afficher erreur
+                FIN SI
+                pause
+            CAS 0
+                retourner
+            AUTRE
+                afficher erreur
+                pause
+        FIN SELON
+    FIN TANT QUE
+FIN FONCTION
+FONCTION menu_utilisateurs
+    TANT QUE vrai
+        nettoyage_ecran
+        afficher menu utilisateurs
+        lire action
+        SELON action
+            CAS 1
+                lire utilisateur
+                SI utilisateur existe ALORS
+                    afficher message
+                SINON
+                    créer utilisateur
+                    afficher succès
+                FIN SI
+                pause
+            CAS 2
+                lire utilisateur
+                SI utilisateur inexistant ALORS
+                    afficher message
+                SINON
+                    lire confirmation
+                    SI oui ALORS
+                        SI dossier home existe ALORS
+                            supprimer utilisateur avec home
+                        SINON
+                            supprimer utilisateur
+                        FIN SI
+                        SI utilisateur existe encore ALORS
+                            afficher erreur
+                        SINON
+                            afficher succès
+                        FIN SI
+                    SINON
+                        afficher annulation
+                    FIN SI
+                FIN SI
+                pause
+            CAS 3
+                lire utilisateur
+                SI utilisateur existe ALORS
+                    appeler menu_motdepasse(utilisateur)
+                SINON
+                    afficher erreur
+                    pause
+                FIN SI
+            CAS 0
+                retourner
+            AUTRE
+                afficher erreur
+                pause
+        FIN SELON
+    FIN TANT QUE
+FIN FONCTION
+FONCTION menu_motdepasse(utilisateur)
+    TANT QUE vrai
+        nettoyage_ecran
+        afficher menu mot de passe
+        lire action
+        SELON action
+            CAS 1
+                définir mot de passe utilisateur
+                afficher succès
+                pause
+            CAS 2
+                supprimer mot de passe utilisateur
+                afficher succès
+                pause
+            CAS 0
+                retourner
+            AUTRE
+                afficher erreur
+                pause
+        FIN SELON
+    FIN TANT QUE
+FIN FONCTION
+FONCTION menu_groupes
+    TANT QUE vrai
+        nettoyage_ecran
+        afficher menu groupes
+        lire action
+        SI action = 0 ALORS
+            retourner
+        FIN SI
+        lire utilisateur
+        SI utilisateur inexistant ALORS
+            afficher erreur
+            pause
+            continuer boucle
+        FIN SI
+        SELON action
+            CAS 1
+                ajouter utilisateur au groupe sudo
+                afficher message
+            CAS 2
+                lire groupe
+                SI groupe inexistant ALORS
+                    créer groupe
+                    afficher succès
+                FIN SI
+                ajouter utilisateur au groupe
+                afficher message
+            AUTRE
+                afficher erreur
+        FIN SELON
+        pause
+    FIN TANT QUE
+FIN FONCTION
+FONCTION menu_infos
+    TANT QUE vrai
+        nettoyage_ecran
+        afficher menu infos système
+        lire action
+        SELON action
+            CAS 1
+                afficher dernières connexions
+                pause
+            CAS 2
+                afficher version OS
+                pause
+            CAS 3
+                afficher partitions
+                pause
+            CAS 4
+                afficher RAM
+                pause
+            CAS 0
+                retourner
+            AUTRE
+                afficher erreur
+                pause
+        FIN SELON
+    FIN TANT QUE
+FIN FONCTION
+TANT QUE vrai
+    nettoyage_ecran
+    afficher menu principal
+    lire choix
+    SELON choix
+        CAS 1
+            menu_machine
+        CAS 2
+            menu_repertoires
+        CAS 3
+            menu_utilisateurs
+        CAS 4
+            menu_groupes
+        CAS 5
+            menu_infos
+        CAS 0
+            quitter programme
+        AUTRE
+            afficher erreur
+            pause
+    FIN SELON
+FIN TANT QUE
+nettoyage_ecran
+FIN
 
