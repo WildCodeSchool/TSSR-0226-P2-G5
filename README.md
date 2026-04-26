@@ -26,7 +26,10 @@
 
 ## 1. Présentation du projet
 
-Le projet consiste à concevoir un outil d’administration centralisée multi-plateforme. Cet outil doit permettre à un administrateur d'exécuter des commandes à distance et de collecter des informations sur une machine cliente(Linux-Ubuntu) à partir d'un serveur dédié(Linux-Débian) au sein d'un même réseau.
+Le projet consiste à concevoir un outil d’administration centralisée multi-plateforme. Cet outil doit permettre à un administrateur d'exécuter des commandes à distance et de collecter des informations sur une machine cliente(Linux-Ubuntu) à partir d'un serveur dédié(Linux-Débian) au sein d'un même réseau et sécurisé par une connexion ssh.
+
+<img width="1111" height="583" alt="SCHEMA_LAB_Prj2" src="https://github.com/user-attachments/assets/7c267ccf-385b-4173-8a54-7a53260b338d" />
+
 
 ## 2. Contexte du projet
 Le projet s'inscrit dans un cadre d'apprentissage des compétences de Technicien Supérieur Systèmes et Réseaux (TSSR). Il simule un environnement professionnel où l'automatisation des tâches récurrentes est essentielle pour maintenir une infrastructure. L'ensemble des machines (serveur et client) évoluent sur un réseau privé commun (172.16.50.0/24)
