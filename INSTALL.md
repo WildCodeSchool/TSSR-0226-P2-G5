@@ -57,6 +57,8 @@
   - Vérification des adresses IP sur chaque machines avec la commande :  *ip a*
   - Test de connectivité
     - Depuis **Le client Ubuntu** : ping <Ip_du_Serveur>
+    - Depuis le serveur : ping <Ip_du_client>
+    
   
  ## 3. Configurations et Installation sur le serveur Debian
 
